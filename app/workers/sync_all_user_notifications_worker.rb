@@ -6,7 +6,7 @@ class SyncAllUserNotificationsWorker
 
   def perform
     User.find_each do |user|
-      SyncNotificationsWorker.perform_async(user.id)
+      user.sync_notifications
     end
   end
 end
