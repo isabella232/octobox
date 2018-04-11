@@ -294,6 +294,17 @@ function openCurrentLink(e) {
   getCurrentRow().find('td.notification-subject .link')[0].click();
 }
 
+function refreshOnSync() {
+  $('.sync .octicon').toggleClass('spinning');
+
+  jQuery.ajax({'url': "/notifications/syncing.json", data: {}, error: function(xhr, status) {
+      setTimeout(refreshOnSync, 2000)
+    }, success: function(data, status, xhr) {
+      location.reload();
+    }
+  });
+}
+
 function sync() {
   $("a.js-sync").click();
 }
