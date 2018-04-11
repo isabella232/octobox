@@ -281,7 +281,9 @@ function openCurrentLink(e) {
 }
 
 function refreshOnSync() {
-  $('.sync .octicon').toggleClass('spinning');
+  if(!$(".sync .octicon").hasClass("spinning")){
+    $(".sync .octicon").addClass("spinning");
+  }
 
   jQuery.ajax({'url': "/notifications/syncing.json", data: {}, error: function(xhr, status) {
       setTimeout(refreshOnSync, 2000)
