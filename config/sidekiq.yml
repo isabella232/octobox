@@ -1,4 +1,5 @@
 ---
 :concurrency: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i %> # From lib/database_config.rb
 :queues:
-  - sync_notifications
+  - [priority_sync_notifications, 10]
+  - [sync_notifications, 1]

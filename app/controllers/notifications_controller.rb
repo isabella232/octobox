@@ -195,7 +195,7 @@ class NotificationsController < ApplicationController
   #
   def sync
     if params[:async]
-      current_user.sync_notifications
+      current_user.sync_notifications(priority: true)
       flash[:notice] = "Syncing notifcations in the background. The page will refresh automatically"
     else
       current_user.sync_notifications_in_foreground
