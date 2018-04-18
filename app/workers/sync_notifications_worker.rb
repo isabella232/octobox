@@ -22,5 +22,6 @@ class SyncNotificationsWorker
 
   def handle_exception(exception, user)
     logger.error("[ERROR] SyncNotificationsJob#perform #{user.github_login} - #{exception.class}: #{exception.message}")
+    store(exception: exception)
   end
 end
