@@ -34,7 +34,7 @@ class SyncNotificationsWorkerTest < ActiveSupport::TestCase
   end
 
   test 'gracefully handles failed user notification syncs' do
-    User.any_instance.stubs(:sync_notifications).raises(Octokit::BadGateway)
+    User.any_instance.stubs(:sync_notifications_in_foreground).raises(Octokit::BadGateway)
 
     assert_nothing_raised do
       Sidekiq::Testing.inline! do
@@ -46,7 +46,7 @@ class SyncNotificationsWorkerTest < ActiveSupport::TestCase
   end
 
   test 'gracefully handles failed user notification syncs with wrong token' do
-    User.any_instance.stubs(:sync_notifications).raises(Octokit::Unauthorized)
+    User.any_instance.stubs(:sync_notifications_in_foreground).raises(Octokit::Unauthorized)
 
     assert_nothing_raised do
       Sidekiq::Testing.inline! do
@@ -58,7 +58,7 @@ class SyncNotificationsWorkerTest < ActiveSupport::TestCase
   end
 
   test 'gracefully handles forbidden user notification syncs' do
-    User.any_instance.stubs(:sync_notifications).raises(Octokit::Forbidden)
+    User.any_instance.stubs(:sync_notifications_in_foreground).raises(Octokit::Forbidden)
 
     assert_nothing_raised do
       Sidekiq::Testing.inline! do
@@ -70,7 +70,7 @@ class SyncNotificationsWorkerTest < ActiveSupport::TestCase
   end
 
   test 'gracefully handles failed user notification syncs when user is offline' do
-    User.any_instance.stubs(:sync_notifications).raises(Faraday::ConnectionFailed.new('offline error'))
+    User.any_instance.stubs(:sync_notifications_in_foreground).raises(Faraday::ConnectionFailed.new('offline error'))
 
     assert_nothing_raised do
       Sidekiq::Testing.inline! do
