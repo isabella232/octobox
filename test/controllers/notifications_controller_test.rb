@@ -292,6 +292,20 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test 'syncs users notifications async' do
+    sign_in_as(@user)
+    job_id = @user.reload.sync_job_id
+
+    inline_sidekiq_status do
+      post "/notifications/sync?async=true"
+    end
+
+    assert_response :redirect
+    assert_equal 1, SyncNotificationsWorker.jobs.size
+    assert_not_equal job_id, @user.reload.sync_job_id
+    assert_equal "Syncing notifcations in the background. The page will refresh automatically", flash[:notice]
+  end
+
   test 'syncs users notifications as json' do
     sign_in_as(@user)
 
@@ -364,6 +378,22 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
 
     post "/notifications/sync.json"
     assert_response :service_unavailable
+  end
+
+  test 'syncing returns ok when not syncing' do
+    sign_in_as(@user)
+
+    User.any_instance.expects(:syncing?).returns(false)
+    get "/notifications/syncing.json"
+    assert_response :ok
+  end
+
+  test 'syncing returns locked when not syncing' do
+    sign_in_as(@user)
+
+    User.any_instance.expects(:syncing?).returns(true)
+    get "/notifications/syncing.json"
+    assert_response :locked
   end
 
   test 'renders the inbox notification count in the sidebar' do
