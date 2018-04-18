@@ -302,9 +302,25 @@ function refreshOnSync() {
   jQuery.ajax({'url': "/notifications/syncing.json", data: {}, error: function(xhr, status) {
       setTimeout(refreshOnSync, 2000)
     }, success: function(data, status, xhr) {
-      location.reload();
+      if (data['error'] != null) {
+        $(".sync .octicon").removeClass("spinning");
+        $(".header-flash-messages").empty();
+        notify(data['error'], 'danger')
+      } else {
+        location.reload();
+      }
     }
   });
+}
+
+function notify(message, type) {
+  var alert_html = [
+    "<div class='alert alert-" + type + " fade in'>",
+    "   <button class='close' data-dismiss='alert'>x</button>",
+    message,
+    "</div>"
+  ].join("\n");
+  $(".header-flash-messages").append(alert_html);
 }
 
 function sync() {
