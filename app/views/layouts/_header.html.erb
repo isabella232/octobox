@@ -69,6 +69,14 @@
                   <% end %>
                 </li>
               <% end %>
+              <% if ENV["OCTOBOX_NATIVE_LINK"] %>
+                <li>
+                  <%= link_to ENV["OCTOBOX_NATIVE_LINK"] do %>
+                    <%= octicon 'desktop-download', height: 16, class: 'text-muted' %>
+                    Download Desktop App
+                  <% end %>
+                </li>
+              <% end %>
               <li role="separator" class="divider"></li>
               <li>
                 <%= link_to logout_path do %>
