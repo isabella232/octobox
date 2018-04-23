@@ -1,5 +1,9 @@
 module Octobox
   class Configurator
+    def attr_encyrption_key
+      ENV.fetch('OCTOBOX_ATTRIBUTE_ENCRYPTION_KEY', "B466AC3542F46118DAE73B43728C4123")
+    end
+
     def github_domain
       @github_domain || ENV.fetch('GITHUB_DOMAIN', 'https://github.com')
     end

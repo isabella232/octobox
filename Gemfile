@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.1'
 
 gem 'rails', '~> 5.2'
+gem "attr_encrypted", "~> 3.0.0"
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'kaminari'
