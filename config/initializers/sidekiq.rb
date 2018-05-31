@@ -17,5 +17,5 @@ end
 
 Sidekiq.configure_client do |config|
   config.redis = { url: Octobox.config.redis_url }
-  Sidekiq::Status.configure_client_middleware config, expiration: 1.day
+  Sidekiq::Status.configure_client_middleware config, expiration: 60.minutes
 end
