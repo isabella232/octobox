@@ -66,6 +66,7 @@ class DownloadService
     return if notifications.blank?
     eager_load_relation = Octobox.config.subjects_enabled? ? :subject : nil
     existing_notifications = user.notifications.includes(eager_load_relation).where(github_id: notifications.map(&:id))
+    existing_notifications = existing_notifications.where.not(subjects: { url: nil })
     notifications.reject{|n| !unarchive && n.unread }.each do |notification|
       n = existing_notifications.find{|en| en.github_id == notification.id.to_i}
       n = user.notifications.new(github_id: notification.id) if n.nil?
