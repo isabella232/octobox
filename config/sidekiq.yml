@@ -3,3 +3,4 @@
 :queues:
   - [priority_sync_notifications, 10]
   - [sync_notifications, 1]
+  - [sync_subjects, 1]
