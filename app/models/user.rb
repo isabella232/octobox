@@ -64,7 +64,10 @@ class User < ApplicationRecord
   end
 
   def sync_notifications(priority: true)
-    return true if syncing?
+    if syncing?
+      Rails.logger.info("\n\n\033[32m[#{Time.now}] INFO -- [User #{self.id}] Already syncing, refusing to enqueue job\033[0m\n\n")
+      return true
+    end
 
     # If the call declares it is priority, then we will override it and put it on the priority queue
     # This is useful for an initial sync or user-invoked sync, otherwise those could be stuck behind scheduled background syncs
