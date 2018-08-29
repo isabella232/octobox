@@ -409,8 +409,8 @@ $(document).ready(function() {
 
 // Sync Handling
 $(document).ready(function() {
-  if($(".js-syncing").length){ refreshOnSync() }
-  if($(".js-sync").length){ sync() }
+  if($(".js-is_syncing").length){ refreshOnSync() }
+  if($(".js-start_sync").length){ sync() }
 });
 
 var lastCheckedNotification = null;
