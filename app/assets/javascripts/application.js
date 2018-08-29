@@ -315,7 +315,7 @@ function refreshOnSync() {
 
 function notify(message, type) {
   var alert_html = [
-    "<div class='alert alert-" + type + " fade in'>",
+    "<div class='alert alert-" + type + " fade show'>",
     "   <button class='close' data-dismiss='alert'>x</button>",
     message,
     "</div>"
