@@ -407,6 +407,12 @@ $(document).ready(function() {
   })
 });
 
+// Sync Handling
+$(document).ready(function() {
+  if($(".js-syncing").length){ refreshOnSync() }
+  if($(".js-sync").length){ sync() }
+});
+
 var lastCheckedNotification = null;
 // handle shift+click multiple check
 $(document).ready(function() {

@@ -1,5 +1,5 @@
 <% if current_user.syncing? %>
-  <%= javascript_tag "refreshOnSync()" %>
+  <span class="js-syncing"><!-- This causes the sync icon to spin --></span>
 <% end %>
 
 <div class="flex-content">
@@ -62,7 +62,7 @@
               <p>This might take a minute or two</p>
             </div>
             <% unless current_user.syncing? %>
-              <%= javascript_tag "sync()" %>
+              <span class="js-sync"><!-- This causes a sync to occur --></span>
             <% end %>
           <% elsif no_url_filter_parameters_present %>
             <div class="blankslate blankslate-spacious blankslate-clean-background">
