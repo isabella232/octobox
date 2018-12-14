@@ -2,7 +2,11 @@
 
 class SyncAllUserNotificationsWorker
   include Sidekiq::Worker
-  sidekiq_options queue: :sync_notifications, unique: :until_and_while_executing
+  sidekiq_options queue: :sync_notifications,
+    unique: :until_and_while_executing,
+    on_conflict: :raise,
+    retry: 2,
+    lock_expiration: 20.minutes
 
   def perform
     User.find_each(&:sync_notifications)
