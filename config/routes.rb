@@ -2,6 +2,7 @@
 
 require 'sidekiq/web'
 require 'sidekiq-status/web'
+require 'sidekiq_unique_jobs/web'
 if Octobox.config.sidekiq_schedule_enabled?
   require 'sidekiq-scheduler/web'
 end
