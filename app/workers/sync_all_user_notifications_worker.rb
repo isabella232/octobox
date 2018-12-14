@@ -6,7 +6,7 @@ class SyncAllUserNotificationsWorker
     unique: :until_and_while_executing,
     on_conflict: :raise,
     retry: 2,
-    lock_expiration: 20.minutes
+    lock_expiration: 20 * 60 # 20 mins
 
   def perform
     User.find_each(&:sync_notifications)
