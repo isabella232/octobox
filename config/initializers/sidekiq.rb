@@ -22,6 +22,10 @@ if Octobox.background_jobs_enabled?
     if Rails.env.production?
       config.logger.level = Logger::WARN
     end
+
+    Sidekiq.default_worker_options = {
+      lock_expiration: 10.minutes,
+    }
   end
 
   Sidekiq.configure_client do |config|
