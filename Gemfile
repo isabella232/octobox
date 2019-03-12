@@ -72,8 +72,10 @@ group :development do
 end
 
 group :production do
-  gem 'skylight', '4.1.2'
   gem 'lograge'
   gem 'puma_worker_killer'
   gem 'hirefire-resource'
 end
+
+gem "sidekiq-failures", "~> 1.0"
+gem "coffee-rails", "~> 4.2"
