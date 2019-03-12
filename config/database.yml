@@ -5,6 +5,8 @@ default: &default
   password: <%= DatabaseConfig.password %>
   host:     <%= DatabaseConfig.host %>
   port:     <%= DatabaseConfig.port %>
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
 
 development:
   <<: *default

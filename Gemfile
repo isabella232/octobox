@@ -77,3 +77,6 @@ group :production do
   gem 'puma_worker_killer'
   gem 'hirefire-resource'
 end
+
+gem "sidekiq-failures", "~> 1.0"
+gem "coffee-rails", "~> 4.2"

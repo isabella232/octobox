@@ -4,6 +4,7 @@ require_relative "../lib/database_config"
 require "rails"
 
 %w(
+  active_job/railtie
   active_record/railtie
   action_controller/railtie
   action_view/railtie
