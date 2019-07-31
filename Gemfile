@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.5'
 
-gem 'rails', '6.0.1'
+gem 'rails', git: 'https://github.com/lugray/rails.git', branch: '31445_fix_includes_unable_to_handle_case_insensitive_joins'
 gem 'bootstrap'
 gem 'attr_encrypted'
 gem 'jquery-rails'
